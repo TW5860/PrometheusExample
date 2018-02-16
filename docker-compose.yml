@@ -2,13 +2,45 @@ version: "2"
 
 services:
 
+  mountebank:
+    build: docker/mountebank
+    ports:
+      - 2525:2525
+      - 8181:8181
+    volumes:
+      - ./config/mountebank:/etc/mountebank
+    logging:
+      driver: json-file
+      options:
+        max-size: "512k"
+        max-file: "2"
+
+  prometheus-blackbox:
+    image: prom/blackbox-exporter
+    ports:
+      - 9115:9115
+    volumes:
+      - ./config/prometheus:/etc/prometheus
+    links:
+      - mountebank
+    command:
+      --config.file=/etc/prometheus/blackbox-exporter.yml
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "512k"
+        max-file: "2"
+
   prometheus:
     image: prom/prometheus
     ports:
       - 9090:9090
     volumes:
-      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./config/prometheus:/etc/prometheus
       - prometheus-data:/prometheus-data
+    links:
+      - prometheus-blackbox
     restart: unless-stopped
     logging:
       driver: json-file
@@ -28,19 +60,6 @@ services:
     links:
       - prometheus
     restart: unless-stopped
-    logging:
-      driver: json-file
-      options:
-        max-size: "512k"
-        max-file: "2"
-
-  mountebank:
-    build: docker/mountebank
-    ports:
-      - 2525:2525
-      - 8181:8181
-    volumes:
-      - ./config/mountebank:/etc/mountebank
     logging:
       driver: json-file
       options:

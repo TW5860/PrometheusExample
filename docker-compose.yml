@@ -33,7 +33,7 @@ services:
         max-file: "2"
 
   prometheus:
-    image: prom/prometheus
+    build: docker/prometheus
     ports:
       - 9090:9090
     volumes:

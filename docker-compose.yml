@@ -49,7 +49,7 @@ services:
         max-file: "2"
 
   grafana:
-    image: grafana/grafana
+    build: docker/grafana
     ports:
       - 3000:3000
     volumes:

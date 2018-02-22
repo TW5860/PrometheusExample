@@ -5,7 +5,7 @@ USER root
 ARG PROMETHEUS_VERSION=2.1.0
 
 RUN set -ex; \ 
-    curl -o /tmp/prometheus.tar.gz -L "https://github.com/prometheus/prometheus/releases/download/v2.1.0/prometheus-${PROMETHEUS_VERSION}.linux-amd64.tar.gz"; \
+    curl -o /tmp/prometheus.tar.gz -L "https://github.com/prometheus/prometheus/releases/download/v${PROMETHEUS_VERSION}/prometheus-${PROMETHEUS_VERSION}.linux-amd64.tar.gz"; \
     tar xfz /tmp/prometheus.tar.gz -C /tmp; \
     rm /tmp/prometheus.tar.gz; \
     mkdir -p /etc/prometheus /usr/share/prometheus; \

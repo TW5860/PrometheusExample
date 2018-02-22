@@ -2,7 +2,7 @@
 
 This is an example setup of [Prometheus
 Monitoring](https://prometheus.io/) for
-[OpenShift](https://www.openshift.com/). it uses Prometheus' [Blackbox
+[OpenShift](https://www.openshift.com/). It uses Prometheus' [Blackbox
 Exporter](https://github.com/prometheus/blackbox_exporter) to monitor
 a fictive HTTP Web service, implemented as a basic
 [Mountebank](http://www.mbtest.org/) mock.

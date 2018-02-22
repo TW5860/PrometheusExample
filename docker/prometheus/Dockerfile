@@ -1,8 +1,8 @@
-FROM registry.access.redhat.com/rhscl/nodejs-6-rhel7
+FROM centos:7
 
 USER root
 
-ENV PROMETHEUS_VERSION=2.1.0
+ARG PROMETHEUS_VERSION=2.1.0
 
 RUN set -ex; \ 
     curl -o /tmp/prometheus.tar.gz -L "https://github.com/prometheus/prometheus/releases/download/v2.1.0/prometheus-${PROMETHEUS_VERSION}.linux-amd64.tar.gz"; \

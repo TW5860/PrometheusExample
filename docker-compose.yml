@@ -16,7 +16,7 @@ services:
         max-file: "2"
 
   prometheus-blackbox:
-    image: prom/blackbox-exporter
+    build: docker/prometheus-blackbox
     ports:
       - 9115:9115
     volumes:
@@ -24,7 +24,7 @@ services:
     links:
       - mountebank
     command:
-      --config.file=/etc/prometheus/blackbox-exporter.yml
+      blackbox_exporter --config.file=/etc/prometheus/blackbox-exporter.yml
     restart: unless-stopped
     logging:
       driver: json-file

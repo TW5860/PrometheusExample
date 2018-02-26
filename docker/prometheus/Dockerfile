@@ -20,6 +20,8 @@ RUN set -ex; \
 
 RUN chown -R nobody: /etc/prometheus /prometheus
 
+COPY prometheus.yml /etc/prometheus
+
 USER nobody
 EXPOSE 9090
 VOLUME [ "/prometheus" ]

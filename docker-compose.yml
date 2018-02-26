@@ -37,7 +37,6 @@ services:
     ports:
       - 9090:9090
     volumes:
-      - ./config/prometheus:/etc/prometheus
       - prometheus-data:/prometheus-data
     links:
       - prometheus-blackbox

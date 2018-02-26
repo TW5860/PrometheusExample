@@ -19,8 +19,6 @@ services:
     build: docker/prometheus-blackbox
     ports:
       - 9115:9115
-    volumes:
-      - ./config/prometheus:/etc/prometheus
     links:
       - mountebank
     command:

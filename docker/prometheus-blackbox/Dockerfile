@@ -13,6 +13,8 @@ RUN set -ex; \
     mv /tmp/blackbox_exporter-${EXPORTER_VERSION}.linux-amd64/blackbox.yml /etc/blackbox_exporter/config.yml; \
     rm -r /tmp/blackbox_exporter-${EXPORTER_VERSION}.linux-amd64
 
+COPY blackbox-exporter.yml /etc/prometheus/blackbox-exporter.yml
+
 USER nobody
 EXPOSE 9115
 CMD [ "/bin/blackbox_exporter", \

@@ -2,8 +2,9 @@ FROM centos:7
 
 USER root
 
-ARG GRAFANA_VERSION=4.6.3
-ARG DOWNLOAD_URL="https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana-${GRAFANA_VERSION}-1.x86_64.rpm"
+#ARG GRAFANA_VERSION=4.6.3-1
+ARG GRAFANA_VERSION=5.0.0-beta4
+ARG DOWNLOAD_URL="https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana-${GRAFANA_VERSION}.x86_64.rpm"
 
 RUN yum install -y initscripts fontconfig urw-fonts
 

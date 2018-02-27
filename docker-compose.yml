@@ -32,7 +32,7 @@ services:
     ports:
       - 9090:9090
     volumes:
-      - prometheus-data:/prometheus-data
+      - prometheus-data:/prometheus
     links:
       - prometheus-blackbox
     logging:

@@ -21,7 +21,6 @@ services:
       - mountebank
     command:
       blackbox_exporter --config.file=/etc/prometheus/blackbox-exporter.yml
-    restart: unless-stopped
     logging:
       driver: json-file
       options:
@@ -36,7 +35,6 @@ services:
       - prometheus-data:/prometheus-data
     links:
       - prometheus-blackbox
-    restart: unless-stopped
     logging:
       driver: json-file
       options:
@@ -53,7 +51,6 @@ services:
     #  - GF_SECURITY_ADMIN_PASSWORD=secret
     links:
       - prometheus
-    restart: unless-stopped
     logging:
       driver: json-file
       options:

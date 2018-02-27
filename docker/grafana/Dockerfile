@@ -16,10 +16,11 @@ RUN set -ex; \
 RUN curl -L https://github.com/tianon/gosu/releases/download/1.10/gosu-amd64 > /usr/sbin/gosu
 RUN chmod +x /usr/sbin/gosu
 
-VOLUME ["/var/lib/grafana", "/var/log/grafana", "/etc/grafana"]
+VOLUME ["/var/lib/grafana", "/var/log/grafana"]
 
 EXPOSE 3000
 
+RUN rm -rf /etc/grafana/provisioning
 COPY provisioning /etc/grafana/provisioning
 COPY dashboards /etc/grafana/dashboards
 COPY ./run.sh /run.sh

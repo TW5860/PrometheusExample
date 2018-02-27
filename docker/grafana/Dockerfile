@@ -13,9 +13,6 @@ RUN set -ex; \
     rpm -Uvh /tmp/grafana.deb; \
     rm /tmp/grafana.deb
 
-RUN curl -L https://github.com/tianon/gosu/releases/download/1.10/gosu-amd64 > /usr/sbin/gosu
-RUN chmod +x /usr/sbin/gosu
-
 VOLUME ["/var/lib/grafana", "/var/log/grafana"]
 
 EXPOSE 3000
@@ -23,6 +20,8 @@ EXPOSE 3000
 RUN rm -rf /etc/grafana/provisioning
 COPY provisioning /etc/grafana/provisioning
 COPY dashboards /etc/grafana/dashboards
+RUN chmod -R go+r /etc/grafana
+
 COPY ./run.sh /run.sh
 
 ENTRYPOINT ["/run.sh"]

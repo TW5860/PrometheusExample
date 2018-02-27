@@ -18,11 +18,10 @@ RUN set -ex; \
     ln -s /usr/share/prometheus/console_libraries /usr/share/prometheus/consoles/ /etc/prometheus/; \
     mkdir -p /prometheus;
 
-RUN chown -R nobody: /etc/prometheus /prometheus
-
 COPY prometheus.yml /etc/prometheus
 
-USER nobody
+RUN chmod -R go+r /etc/prometheus
+
 EXPOSE 9090
 VOLUME [ "/prometheus" ]
 WORKDIR /prometheus

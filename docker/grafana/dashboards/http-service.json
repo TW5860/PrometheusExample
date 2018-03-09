@@ -85,7 +85,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "probe_success",
+          "expr": "tests_successful",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 1,
@@ -167,7 +167,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "probe_http_duration_seconds",
+          "expr": "tests_total",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 1,
@@ -177,7 +177,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Request duration",
+      "title": "Number of tests",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -248,7 +248,7 @@
     ]
   },
   "timezone": "",
-  "title": "HTTP Service",
+  "title": "Selenium Google Check",
   "uid": "18-Uzt3zk",
-  "version": 22
+  "version": 23
 }

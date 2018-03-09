@@ -79,13 +79,18 @@
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [],
+      "seriesOverrides": [
+        {
+          "alias": "tests_successful{browser=\"firefox\",instance=\"app.myproject.svc:8080\",job=\"SeleniumLiveness\"}",
+          "color": "#ef843c"
+        }
+      ],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
       "targets": [
         {
-          "expr": "tests_successful",
+          "expr": "tests_successful{browser=\"firefox\"}",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 1,
@@ -95,7 +100,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Availability",
+      "title": "Availability with Firefox",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -143,7 +148,7 @@
         "x": 12,
         "y": 0
       },
-      "id": 5,
+      "id": 6,
       "legend": {
         "avg": false,
         "current": false,
@@ -161,13 +166,18 @@
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [],
+      "seriesOverrides": [
+        {
+          "alias": "tests_successful{browser=\"chrome\",instance=\"app.myproject.svc:8080\",job=\"SeleniumLiveness\"}",
+          "color": "#1f78c1"
+        }
+      ],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
       "targets": [
         {
-          "expr": "up{job=\"SeleniumLiveness\"}",
+          "expr": "tests_successful{browser=\"chrome\"}",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 1,
@@ -177,7 +187,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Uptime Selenium Test",
+      "title": "Availability with Chrome",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -291,6 +301,88 @@
           "show": true
         }
       ]
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "PROMETHEUS",
+      "fill": 1,
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 9
+      },
+      "id": 5,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "up{job=\"SeleniumLiveness\"}",
+          "format": "time_series",
+          "instant": false,
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Uptime Selenium Test",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": null,
+          "format": "short",
+          "label": "",
+          "logBase": 1,
+          "max": "1",
+          "min": "0",
+          "show": true
+        },
+        {
+          "decimals": null,
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": "1",
+          "min": "0",
+          "show": true
+        }
+      ]
     }
   ],
   "refresh": "5s",
@@ -301,7 +393,7 @@
     "list": []
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {
@@ -332,5 +424,5 @@
   "timezone": "",
   "title": "Selenium Google Check",
   "uid": "18-Uzt3zk",
-  "version": 23
+  "version": 5
 }

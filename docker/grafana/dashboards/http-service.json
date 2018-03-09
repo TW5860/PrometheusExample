@@ -289,7 +289,7 @@
           "label": null,
           "logBase": 1,
           "max": null,
-          "min": null,
+          "min": "0",
           "show": true
         },
         {
@@ -424,5 +424,5 @@
   "timezone": "",
   "title": "Selenium Google Check",
   "uid": "18-Uzt3zk",
-  "version": 5
+  "version": 6
 }

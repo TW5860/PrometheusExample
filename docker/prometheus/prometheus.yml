@@ -17,12 +17,9 @@ scrape_configs:
 
     static_configs:
       - targets: ['localhost:9090']
-  - job_name: 'VertragsAufbereitungZurSicherstellungIPSPrüfungNachVorgangssteuerungBES'
+  - job_name: 'SeleniumLiveness'
     scrape_interval: 5s
-    metrics_path: /probe
-    params:
-      module: [http_service]
-      target: ['http://mountebank:8181']
+    metrics_path: /prometheus
     scheme: http
     static_configs:
-      - targets: ['prometheus-blackbox:9115']
+      - targets: ['@@SELENIUM_APP_HOSTNAME@@:8080']

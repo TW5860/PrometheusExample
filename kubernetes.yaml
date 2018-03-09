@@ -1,0 +1,331 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kompose.cmd: kompose convert -f docker-compose.yml --provider openshift --build
+        build-config --build-repo https://github.com/tw5860/PrometheusExample.git
+        -o kubernetes.yaml
+      kompose.version: 1.9.0 ()
+    creationTimestamp: null
+    labels:
+      io.kompose.service: grafana
+    name: grafana
+  spec:
+    ports:
+    - name: "3000"
+      port: 3000
+      targetPort: 3000
+    selector:
+      io.kompose.service: grafana
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kompose.cmd: kompose convert -f docker-compose.yml --provider openshift --build
+        build-config --build-repo https://github.com/tw5860/PrometheusExample.git
+        -o kubernetes.yaml
+      kompose.version: 1.9.0 ()
+    creationTimestamp: null
+    labels:
+      io.kompose.service: prometheus
+    name: prometheus
+  spec:
+    ports:
+    - name: "9090"
+      port: 9090
+      targetPort: 9090
+    selector:
+      io.kompose.service: prometheus
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: DeploymentConfig
+  metadata:
+    annotations:
+      kompose.cmd: kompose convert -f docker-compose.yml --provider openshift --build
+        build-config --build-repo https://github.com/tw5860/PrometheusExample.git
+        -o kubernetes.yaml
+      kompose.version: 1.9.0 ()
+    creationTimestamp: null
+    labels:
+      io.kompose.service: grafana
+      app: Prometheus-Monitoring
+    name: grafana
+  spec:
+    replicas: 1
+    selector:
+      io.kompose.service: grafana
+    strategy:
+      resources: {}
+      type: Recreate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          io.kompose.service: grafana
+      spec:
+        containers:
+        - image: ' '
+          name: grafana
+          ports:
+          - containerPort: 3000
+          resources: {}
+          volumeMounts:
+          - mountPath: /var/lib/grafana
+            name: prometheusexample-grafana-data
+        restartPolicy: Always
+        volumes:
+        - name: prometheusexample-grafana-data
+          persistentVolumeClaim:
+            claimName: prometheusexample-grafana-data
+    test: false
+    triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+        - grafana
+        from:
+          kind: ImageStreamTag
+          name: grafana:latest
+      type: ImageChange
+  status: {}
+- apiVersion: v1
+  kind: ImageStream
+  metadata:
+    creationTimestamp: null
+    labels:
+      io.kompose.service: grafana
+    name: grafana
+  spec:
+    tags:
+    - annotations: null
+      from:
+        kind: DockerImage
+        name: grafana
+      generation: null
+      importPolicy: {}
+      name: latest
+  status:
+    dockerImageRepository: ""
+- apiVersion: v1
+  kind: BuildConfig
+  metadata:
+    annotations:
+      kompose.cmd: kompose convert -f docker-compose.yml --provider openshift --build
+        build-config --build-repo https://github.com/tw5860/PrometheusExample.git
+        -o kubernetes.yaml
+      kompose.version: 1.9.0 ()
+    creationTimestamp: null
+    labels:
+      io.kompose.service: grafana
+    name: grafana
+  spec:
+    nodeSelector: null
+    output:
+      to:
+        kind: ImageStreamTag
+        name: grafana:latest
+    postCommit: {}
+    resources: {}
+    runPolicy: Serial
+    source:
+      contextDir: docker/grafana/
+      git:
+        ref: master
+        uri: https://github.com/tw5860/PrometheusExample.git
+      type: Git
+    strategy:
+      dockerStrategy: {}
+      type: Docker
+    triggers:
+    - type: ConfigChange
+  status:
+    lastVersion: 0
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    creationTimestamp: null
+    labels:
+      io.kompose.service: prometheusexample-grafana-data
+    name: prometheusexample-grafana-data
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 100Mi
+  status: {}
+- apiVersion: v1
+  kind: DeploymentConfig
+  metadata:
+    annotations:
+      kompose.cmd: kompose convert -f docker-compose.yml --provider openshift --build
+        build-config --build-repo https://github.com/tw5860/PrometheusExample.git
+        -o kubernetes.yaml
+      kompose.version: 1.9.0 ()
+    creationTimestamp: null
+    labels:
+      io.kompose.service: prometheus
+      app: Prometheus-Monitoring
+    name: prometheus
+  spec:
+    replicas: 1
+    selector:
+      io.kompose.service: prometheus
+    strategy:
+      resources: {}
+      type: Recreate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          io.kompose.service: prometheus
+      spec:
+        containers:
+        - image: ' '
+          name: prometheus
+          ports:
+          - containerPort: 9090
+          resources: {}
+          volumeMounts:
+          - mountPath: /prometheus
+            name: prometheusexample-prometheus-data
+        restartPolicy: Always
+        volumes:
+        - name: prometheusexample-prometheus-data
+          persistentVolumeClaim:
+            claimName: prometheusexample-prometheus-data
+    test: false
+    triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+        - prometheus
+        from:
+          kind: ImageStreamTag
+          name: prometheus:latest
+      type: ImageChange
+  status: {}
+- apiVersion: v1
+  kind: ImageStream
+  metadata:
+    creationTimestamp: null
+    labels:
+      io.kompose.service: prometheus
+    name: prometheus
+  spec:
+    tags:
+    - annotations: null
+      from:
+        kind: DockerImage
+        name: prometheus
+      generation: null
+      importPolicy: {}
+      name: latest
+  status:
+    dockerImageRepository: ""
+- apiVersion: v1
+  kind: BuildConfig
+  metadata:
+    annotations:
+      kompose.cmd: kompose convert -f docker-compose.yml --provider openshift --build
+        build-config --build-repo https://github.com/tw5860/PrometheusExample.git
+        -o kubernetes.yaml
+      kompose.version: 1.9.0 ()
+    creationTimestamp: null
+    labels:
+      io.kompose.service: prometheus
+    name: prometheus
+  spec:
+    nodeSelector: null
+    output:
+      to:
+        kind: ImageStreamTag
+        name: prometheus:latest
+    postCommit: {}
+    resources: {}
+    runPolicy: Serial
+    source:
+      contextDir: docker/prometheus/
+      git:
+        ref: master
+        uri: https://github.com/tw5860/PrometheusExample.git
+      type: Git
+    strategy:
+      dockerStrategy: {}
+      type: Docker
+    triggers:
+    - type: ConfigChange
+  status:
+    lastVersion: 0
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    creationTimestamp: null
+    labels:
+      io.kompose.service: prometheusexample-prometheus-data
+    name: prometheusexample-prometheus-data
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 100Mi
+  status: {}
+- apiVersion: v1
+  kind: Route
+  metadata:
+    creationTimestamp: '2018-03-09T10:04:02Z'
+    name: grafana
+    namespace: myproject
+  spec:
+    host: grafana-myproject.192.168.99.102.nip.io
+    port:
+      targetPort: '3000'
+    to:
+      kind: Service
+      name: grafana
+      weight: 100
+    wildcardPolicy: None
+  status:
+    ingress:
+      - conditions:
+          - lastTransitionTime: '2018-03-09T10:05:02Z'
+            status: 'True'
+            type: Admitted
+        host: grafana-myproject.192.168.99.102.nip.io
+        routerName: router
+        wildcardPolicy: None
+- apiVersion: v1
+  kind: Route
+  metadata:
+    creationTimestamp: '2018-03-09T10:04:02Z'
+    name: prometheus
+    namespace: myproject
+  spec:
+    host: prometheus-myproject.192.168.99.102.nip.io
+    port:
+      targetPort: '9090'
+    to:
+      kind: Service
+      name: prometheus
+      weight: 100
+    wildcardPolicy: None
+  status:
+    ingress:
+      - conditions:
+          - lastTransitionTime: '2018-03-09T10:05:02Z'
+            status: 'True'
+            type: Admitted
+        host: prometheus-myproject.192.168.99.102.nip.io
+        routerName: router
+        wildcardPolicy: None
+kind: List
+metadata: {}
+

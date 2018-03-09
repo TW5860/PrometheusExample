@@ -281,51 +281,25 @@ items:
 - apiVersion: v1
   kind: Route
   metadata:
-    creationTimestamp: '2018-03-09T10:04:02Z'
     name: grafana
-    namespace: myproject
   spec:
-    host: grafana-myproject.192.168.99.102.nip.io
     port:
       targetPort: '3000'
     to:
       kind: Service
       name: grafana
       weight: 100
-    wildcardPolicy: None
-  status:
-    ingress:
-      - conditions:
-          - lastTransitionTime: '2018-03-09T10:05:02Z'
-            status: 'True'
-            type: Admitted
-        host: grafana-myproject.192.168.99.102.nip.io
-        routerName: router
-        wildcardPolicy: None
 - apiVersion: v1
   kind: Route
   metadata:
-    creationTimestamp: '2018-03-09T10:04:02Z'
     name: prometheus
-    namespace: myproject
   spec:
-    host: prometheus-myproject.192.168.99.102.nip.io
     port:
       targetPort: '9090'
     to:
       kind: Service
       name: prometheus
       weight: 100
-    wildcardPolicy: None
-  status:
-    ingress:
-      - conditions:
-          - lastTransitionTime: '2018-03-09T10:05:02Z'
-            status: 'True'
-            type: Admitted
-        host: prometheus-myproject.192.168.99.102.nip.io
-        routerName: router
-        wildcardPolicy: None
+
 kind: List
 metadata: {}
-

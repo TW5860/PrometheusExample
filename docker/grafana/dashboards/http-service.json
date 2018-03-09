@@ -167,7 +167,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "tests_total",
+          "expr": "rate(tests_total[5m]) * 60",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 1,
@@ -177,7 +177,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Number of tests",
+      "title": "Rate tests per minute",
       "tooltip": {
         "shared": true,
         "sort": 0,

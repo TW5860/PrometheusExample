@@ -96,8 +96,7 @@ items:
         restartPolicy: Always
         volumes:
         - name: prometheusexample-grafana-data
-          persistentVolumeClaim:
-            claimName: prometheusexample-grafana-data
+          emptyDir: {}
     test: false
     triggers:
     - type: ConfigChange
@@ -174,21 +173,6 @@ items:
   status:
     lastVersion: 0
 - apiVersion: v1
-  kind: PersistentVolumeClaim
-  metadata:
-    creationTimestamp: null
-    labels:
-      io.kompose.service: prometheusexample-grafana-data
-      application.name: prometheus-grafana
-    name: prometheusexample-grafana-data
-  spec:
-    accessModes:
-    - ReadWriteOnce
-    resources:
-      requests:
-        storage: 100Mi
-  status: {}
-- apiVersion: v1
   kind: DeploymentConfig
   metadata:
     annotations:
@@ -240,8 +224,7 @@ items:
         restartPolicy: Always
         volumes:
         - name: prometheusexample-prometheus-data
-          persistentVolumeClaim:
-            claimName: prometheusexample-prometheus-data
+          emptyDir: {}
     test: false
     triggers:
     - type: ConfigChange
@@ -317,21 +300,6 @@ items:
     - type: ConfigChange
   status:
     lastVersion: 0
-- apiVersion: v1
-  kind: PersistentVolumeClaim
-  metadata:
-    creationTimestamp: null
-    labels:
-      io.kompose.service: prometheusexample-prometheus-data
-      application.name: prometheus-grafana
-    name: prometheusexample-prometheus-data
-  spec:
-    accessModes:
-    - ReadWriteOnce
-    resources:
-      requests:
-        storage: 100Mi
-  status: {}
 - apiVersion: v1
   kind: Route
   metadata:

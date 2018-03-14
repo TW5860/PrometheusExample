@@ -3,7 +3,7 @@ FROM centos:7
 USER root
 
 ARG PROMETHEUS_VERSION=2.1.0
-ARG SELENIUM_APP_HOSTNAME=app.myproject.svc
+ARG SELENIUM_APP_HOSTNAME=selenium-test
 
 RUN set -ex; \ 
     curl -o /tmp/prometheus.tar.gz -L "https://github.com/prometheus/prometheus/releases/download/v${PROMETHEUS_VERSION}/prometheus-${PROMETHEUS_VERSION}.linux-amd64.tar.gz"; \

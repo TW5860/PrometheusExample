@@ -140,7 +140,10 @@ items:
         uri: https://github.com/tw5860/PrometheusExample.git
       type: Git
     strategy:
-      dockerStrategy: {}
+      dockerStrategy:
+        from:
+          kind: "ImageStreamTag"
+          name: "dlb-openshift-base:7"
       type: Docker
     triggers:
     - type: ConfigChange
@@ -258,7 +261,10 @@ items:
         uri: https://github.com/tw5860/PrometheusExample.git
       type: Git
     strategy:
-      dockerStrategy: {}
+      dockerStrategy:
+        from:
+          kind: "ImageStreamTag"
+          name: "dlb-openshift-base:7"
       type: Docker
     triggers:
     - type: ConfigChange

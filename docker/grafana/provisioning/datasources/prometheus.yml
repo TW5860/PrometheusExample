@@ -8,7 +8,7 @@ datasources:
   # <string, required> datasource type. Required
   type: prometheus
   # <string, required> access mode. direct or proxy. Required
-  access: direct
+  access: proxy
   # <int> org id. will default to org_id 1 if not specified
   org_id: 1
   # <string> url

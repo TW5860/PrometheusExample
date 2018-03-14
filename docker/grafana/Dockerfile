@@ -24,4 +24,6 @@ RUN chmod -R go+r /etc/grafana
 
 COPY ./run.sh /run.sh
 
+ENV HTTP_PROXY="some-proxy:8080"
+
 ENTRYPOINT ["/run.sh"]

@@ -81,7 +81,7 @@
       "renderer": "flot",
       "seriesOverrides": [
         {
-          "alias": "tests_successful{browser=\"firefox\",instance=\"app.myproject.svc:8080\",job=\"SeleniumLiveness\"}",
+          "alias": "tests_successful{browser=\"firefox\",job=\"SeleniumLiveness\"}",
           "color": "#ef843c"
         }
       ],
@@ -168,7 +168,7 @@
       "renderer": "flot",
       "seriesOverrides": [
         {
-          "alias": "tests_successful{browser=\"chrome\",instance=\"app.myproject.svc:8080\",job=\"SeleniumLiveness\"}",
+          "alias": "tests_successful{browser=\"chrome\",job=\"SeleniumLiveness\"}",
           "color": "#1f78c1"
         }
       ],

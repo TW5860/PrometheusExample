@@ -329,7 +329,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Step Duration with Firefox",
+      "title": "Step Duration with Chrome",
       "tooltip": {
         "shared": true,
         "sort": 0,
